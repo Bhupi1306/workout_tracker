@@ -26,6 +26,10 @@ class TokenType(str, Enum):
 
 #-----USER-----#
 
+class UserLogin(BaseModel):
+    email:EmailStr
+    password: str
+
 class User(BaseModel):
     user_name : str
     email: EmailStr

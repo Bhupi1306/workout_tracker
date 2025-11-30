@@ -24,5 +24,7 @@ def data_to_jwt(user: UserOut, type: TokenType):
     encoded_jwt = jwt.encode(to_encode, SECRET, algorithm=ALGORITHM )
     return encoded_jwt
 
+
 def jwt_to_data(token: str):
-    pass
+    data = jwt.decode(token, SECRET, algorithms=ALGORITHM)
+    return data
