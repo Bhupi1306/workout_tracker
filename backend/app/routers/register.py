@@ -44,10 +44,8 @@ async def register(user: UserCreate,  response:Response, db: Session = Depends(g
 
         response.set_cookie(key="refresh_token", value=refresh_token, httponly=True, secure=False) # Make secure=True in production
         user_dict.token = access_token
-
-
+        return user_dict
 
     except Exception as error:
         raise HTTPException(status_code=500, detail=error)
         
-    return user_dict
