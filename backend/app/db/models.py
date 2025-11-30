@@ -9,7 +9,7 @@ class Exercise(Base):
     __tablename__ = "exercises"
 
     id = Column(Integer, primary_key=True, nullable=False, index = True)
-    name = Column(String,nullable=False, index = True)
+    name = Column(String,nullable=False,unique=True, index = True)
     description = Column(String,nullable=False)
     category = Column(ARRAY(String),nullable=False)
     muscle_group = Column(ARRAY(String),nullable=False)
@@ -21,8 +21,8 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, nullable=False, index = True)
-    user_name = Column(String, nullable=False, index=True)
-    email = Column(String, nullable=False)
+    user_name = Column(String, nullable=False,unique=True, index=True)
+    email = Column(String,unique=True, nullable=False)
     password = Column(String, nullable=False)
 
     workout_plans = relationship("WorkoutPlan", back_populates="user")

@@ -19,8 +19,9 @@ class MuscleGroup(str, Enum):
     Core = 'Core'
     Leg = 'leg'
 
-
-
+class TokenType(str, Enum):
+    access = 'access'
+    refresh = 'refresh'
 
 
 #-----USER-----#
@@ -34,9 +35,10 @@ class UserCreate(User):
 
 class UserOut(User):
     id: int
+    token: str | None = None
 
     class Config:
-        orm_mode=True
+        from_attributes=True
 
 
 
@@ -54,7 +56,7 @@ class ExerciseOut(ExerciseCreate):
     id: int
 
     class Config:
-        orm_mode=True
+        from_attributes=True
 
 
 #-----WORKOUT PLAN-----#
@@ -67,7 +69,7 @@ class WorkoutPlanOut(BaseModel):
     id: int
 
     class Config():
-        orm_mode=True
+        from_attributes=True
 
 
 
@@ -82,4 +84,4 @@ class WorkoutExerciseOut(BaseModel):
     id: int
 
     class Config:
-        orm_mode=True
+        from_attributes=True
