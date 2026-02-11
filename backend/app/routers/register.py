@@ -47,5 +47,5 @@ async def register(user: UserCreate,  response:Response, db: Session = Depends(g
         return user_dict
 
     except Exception as error:
-        raise HTTPException(status_code=500, detail=error)
+        raise HTTPException(status_code=500, detail="Something went wrong")
         

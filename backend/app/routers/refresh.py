@@ -25,4 +25,4 @@ def refresh(refresh_token : str = Cookie(None)):
         }
     
     except Exception as error:
-        raise HTTPException(status_code=401, detail=error)
+        raise HTTPException(status_code=401, detail="Something went wrong")

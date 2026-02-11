@@ -38,4 +38,4 @@ def login(user: UserLogin,response: Response, db: Session = Depends(get_db)):
         
     
     except Exception as error:
-        raise HTTPException(status_code=500, detail=error)
+        raise HTTPException(status_code=500, detail="Something went wrong")
