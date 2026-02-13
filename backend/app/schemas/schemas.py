@@ -67,12 +67,8 @@ class ExerciseOut(ExerciseCreate):
 
 class WorkoutPlanCreate(BaseModel):
     name: str
-    user_id: int
 
-class WorkoutPlanOut(BaseModel):
-    id: int
-
-    class Config():
+    class Config:
         from_attributes=True
 
 
@@ -83,9 +79,5 @@ class WorkoutExercise(BaseModel):
     exercise_id: int
     workout_plan_id: int
     completed: bool=False
-
-class WorkoutExerciseOut(BaseModel):
-    id: int
-
     class Config:
         from_attributes=True

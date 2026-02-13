@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from ..db.connect import get_db
 from ..db.models import User
 from ..schemas.schemas import UserOut, UserLogin
-from ..utils.hashing import hash_password, verify_password
+from ..utils.hashing import verify_password
 from ..utils.jwt import data_to_jwt
 
 router = APIRouter(tags=["login"])
@@ -19,11 +19,11 @@ def login(user: UserLogin,response: Response, db: Session = Depends(get_db)):
         db_user = db.query(User).filter(User.email == user.email).first()
 
         if not db_user:
-            raise HTTPException(status_code=400, detail="User with this email does not exists")
+            raise HTTPException(status_code=400, detail="Invalid Credentials")
         
         verify = verify_password(user.password, str(db_user.password))
         if not verify:
-            raise HTTPException(status_code=400, detail="invalid password")
+            raise HTTPException(status_code=400, detail="Inavalid Credentials")
             
         user_dict = UserOut.model_validate(db_user)
         access_token = data_to_jwt(user_dict, 'access')
@@ -35,7 +35,9 @@ def login(user: UserLogin,response: Response, db: Session = Depends(get_db)):
 
         return user_dict
 
-        
+    except HTTPException as http_error:
+        raise http_error
     
     except Exception as error:
+        print(error)
         raise HTTPException(status_code=500, detail="Something went wrong")
